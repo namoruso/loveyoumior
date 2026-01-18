@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Para ti ❤️</title>
+    <meta property="og:title" content="Tengo un mensaje para ti ❤️">
+    <meta property="og:image" content="https://img.freepik.com/vector-gratis/tema-san-valentin-corazones-cielo-rosa_1308-38030.jpg">
+    <style>
+        :root {
+            --primary-color: #d63384;
+            --bubble-bg: rgba(255, 255, 255, 0.92);
+        }
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            text-align: center;
+            overflow: hidden;
+            position: relative;
+            padding-left: env(safe-area-inset-left);
+            padding-right: env(safe-area-inset-right);
+        }
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: url('https://img.freepik.com/vector-gratis/tema-san-valentin-corazones-cielo-rosa_1308-38030.jpg?semt=ais_hybrid&w=740') no-repeat center center;
+            background-size: cover;
+            z-index: -1;
+            animation: breathe 15s ease-in-out infinite alternate;
+        }
+        @keyframes breathe {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.05); }
+        }
+        .message {
+            background: rgba(255, 255, 255, 0.85);
+            padding: 20px 25px;
+            border-radius: 25px;
+            box-shadow: 0 8px 32px 0 rgba(214, 51, 132, 0.2);
+            font-size: clamp(2rem, 6vw, 3.5rem);
+            color: var(--primary-color);
+            font-weight: 800;
+            z-index: 10;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            animation: pulse 2s infinite;
+            max-width: 85%;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        #bubbles-text {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 5;
+        }
+        .text-bubble {
+            position: absolute;
+            font-size: clamp(15px, 4.5vw, 19px);
+            font-family: 'Brush Script MT', 'Cursive', cursive;
+            color: #c2185b;
+            background-color: var(--bubble-bg);
+            padding: 10px 18px;
+            border-radius: 50px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            white-space: nowrap;
+            will-change: transform, opacity;
+            transform: translateX(-50%);
+            animation: floatUpCentered 7s linear forwards;
+        }
+        @keyframes floatUpCentered {
+            0% { opacity: 0; transform: translate(-50%, 40px) scale(0.7); }
+            10% { opacity: 1; transform: translate(-50%, 0px) scale(1); }
+            90% { opacity: 1; transform: translate(-50%, -150px) scale(1); }
+            100% { opacity: 0; transform: translate(-50%, -200px) scale(0.9); }
+        }
+    </style>
+</head>
+<body>
+    <div class="message">I Love You ❤️</div>
+    <div id="bubbles-text"></div>
+    <script>
+        const messages = [
+            "Te amo ❤️",
+            "Me encantas 😍",
+            "Eres preciosa 🌹",
+            "Mi lugar favorito 🏡",
+            "Te pienso siempre 💭",
+            "Muy bonita ✨",
+            "Lo mejor que me ha pasado 💘",
+            "Estoy orgulloso de ti 🌟",
+            "Te voy a mantener 🤞",
+            "Mi suerte 🍀",
+            "Fan de tu risa 😂",
+            "Vamos con todo 🚀",
+            "Me haces bien ❤️‍🩹",
+            "Siempre tú y yo ♾️",
+            "Esa carita 😍",
+            "Mi paz mental 🍃",
+            "Gracias por existir 🙏"
+        ];
+
+        function createTextBubble() {
+            const container = document.getElementById("bubbles-text");
+            if (container.children.length > 7) return;
+
+            const bubble = document.createElement("div");
+            bubble.className = "text-bubble";
+            bubble.innerText = messages[Math.floor(Math.random() * messages.length)];
+
+            const minX = 15;
+            const maxX = 85;
+            const left = Math.random() * (maxX - minX) + minX;
+            const top = Math.random() * 40 + 50;
+
+            bubble.style.left = left + "%";
+            bubble.style.top = top + "%";
+
+            container.appendChild(bubble);
+
+            setTimeout(() => {
+                if (bubble.parentNode) bubble.remove();
+            }, 7000);
+        }
+
+        setInterval(createTextBubble, 900);
+    </script>
+</body>
+</html>
